@@ -1,10 +1,18 @@
 def calculate_actual_time(stop_time, count):
+    """
+    Функция подчитывает актуальное время
+    :param stop_time: время, когда остановились часы
+    :param count: количество часов, которое часы не работали
+    :return: возращает верное время
+    """
     stop_hour, stop_minute, stop_second = map(int, stop_time.split(':'))
 
-    total_seconds = stop_hour * 3600 + stop_minute * 60 + stop_second + count
+    total_seconds = stop_hour * 3600 + stop_minute * 60 + stop_second + count*3600
     actual_hour = total_seconds // 3600
     actual_minute = (total_seconds % 3600) // 60
     actual_second = total_seconds % 60
+    if actual_hour>=24:
+        actual_hour = actual_hour % 24
 
     return f"{actual_hour:02d}:{actual_minute:02d}:{actual_second:02d}"
 
